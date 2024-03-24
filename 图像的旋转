@@ -1,0 +1,13 @@
+import cv2 as cv
+import numpy as np
+import matplotlib.pyplot as plt
+img1=cv.imread(r"C:\Users\86159\Desktop\lenovo20221016154728.jpeg")
+img2=cv.imread(r"C:\Users\86159\Desktop\125704.jpeg")
+img1_resized = cv.resize(img1, (img2.shape[1], img2.shape[0]))
+img3=cv.addWeighted(img1_resized,0.7,img2,0.3,0)
+plt.imshow(cv.cvtColor(img3, cv.COLOR_BGR2RGB))
+rows,cols=img3.shape[:2]
+M=cv.getRotationMatrix2D((cols/2,rows/2),180,1)
+dst=cv.warpAffine(img3,M,(cols,rows))
+plt.imshow(dst[:,:,::-1])
+plt.show()
