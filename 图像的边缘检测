@@ -1,0 +1,15 @@
+import cv2 as cv
+import numpy as np
+import matplotlib.pyplot as plt
+img1=cv.imread(r"C:\Users\86159\Desktop\ec7f60cb82c0ccb62695b8119379ab66.jpeg")
+img2=cv.imread(r"C:\Users\86159\Desktop\125704.jpeg")
+img1_resized = cv.resize(img1, (img2.shape[1], img2.shape[0]))
+img3=cv.addWeighted(img1_resized,0.7,img2,0.3,0)
+x=cv.Sobel(img2,cv.CV_16S,1,0)
+y=cv.Sobel(img2,cv.CV_16S,0,1)
+sx=cv.convertScaleAbs(x)
+sy=cv.convertScaleAbs(y)
+result=cv.addWeighted(sx,0.5,sy,0.5,0)
+plt.imshow(result,cmap=plt.cm.gray)
+cv.imwrite(r"C:\Users\86159\Desktop\result.jpeg",result)
+plt.show()
