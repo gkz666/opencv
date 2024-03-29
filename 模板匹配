@@ -1,0 +1,16 @@
+import cv2 as cv
+import numpy as np
+import matplotlib.pyplot as plt
+img1=cv.imread(r"C:\Users\86159\Desktop\ec7f60cb82c0ccb62695b8119379ab66.jpeg")
+template=cv.imread(r"C:\Users\86159\Desktop\666.jpeg")
+h,w,l=template.shape
+res=cv.matchTemplate(img1,template,cv.TM_SQDIFF)
+minv,maxv,minl,maxl=cv.minMaxLoc(res)
+topleft=minl
+bottomr=(topleft[0]+w,topleft[1]+h)
+cv.rectangle(img1,topleft,bottomr,(0,255,0),2)
+plt.imshow(img1[:,:,::-1])
+plt.xticks([]),plt.yticks([])
+plt.show()
+/*感觉还是用平方差好一点cv.TM_SQDIFF
+*/
